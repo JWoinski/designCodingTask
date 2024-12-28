@@ -1,0 +1,30 @@
+Problem z konfiguracją:
+
+Z jakiegoś powodu gdy wysyłam .send() w OrderService to jest on not Completed
+
+przykład wywołania printa z processOrder:
+
+java.util.concurrent.CompletableFuture@1e4d7bee[Not completed]
+
+co zarazem widać w tym, że listener nie otrzymał nic
+
+Domyślam się błędów w Kafka Config, application.properties, docker-compose choć najbardziej to Kafka Config
+
+a po czasie mam:
+
+Exception thrown when sending a message with key='null' and
+payload='OrderRequestDTO(shipmentNumber=12345, receiverEmail=test@example.com, receiverCountryCode=US, sender...' to topic order-topic:
+
+org.apache.kafka.common.errors.TimeoutException: Expiring 2 record(s) for order-topic-0:120015 ms has passed since batch creation
+
+
+Jak dam większy timeout to i tak tylko wydłuże czas czekania na ten exception
+
+
+Poza tym nie działa mi klasycznie baza zapewne jakiś błąd z rootem, którego znowu powinien wykrywać automatycznie a nie wykrywa.
+
+Patrząc na rzeczy do zrobienia to zostało mi tylko to i wrzucić na docker huba i w sumie mamy wszystko gotowe.
+
+Listener napewno działa coś spieprzyłem przy konfiguracji i przestał działać Producer a tak miałem ładnie działający i wysyłał normalnie na baze danych logi
+
+Gdybym do tego doszedł to zacząłbym testy integracyjne a tak to stoje w miejscu.
