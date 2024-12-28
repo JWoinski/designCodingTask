@@ -8,8 +8,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class OrderRequestDto {
     @NotEmpty(message = "Shipment number is required")
     private String shipmentNumber;
